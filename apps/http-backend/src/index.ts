@@ -6,6 +6,7 @@ import { JWT_SECRET } from "@repo/backend-common/config";
 import { middleware } from "./middleware";
 import {createUserSchema, loginUserSchema, createRoomSchema} from "@repo/common/types";
 import {prismaClient }  from "@repo/db/client";
+import bcrypt from "bcrypt"
 const app  = express();
 app.use(express.json());
 
@@ -21,10 +22,11 @@ app.post("/signup", async(req,res) =>{
     }
 
     try {
+    const hashedPassword = await bcrypt.hash(parsedData.data.password,10);
     const user  = await prismaClient.user.create({
     data:{
         email: parsedData.data.username,
-        password: parsedData.data.password,
+        password: hashedPassword,
         name: parsedData.data.name
     }
     });
@@ -55,7 +57,7 @@ app.post("/signin", async (req,res) =>{
     const user = await prismaClient.user.findFirst({
         where:{
             email: parsedData.data.username,
-            password: parsedData.data.password
+            // password: parsedData.data.password
         }
     })
 
@@ -63,6 +65,15 @@ app.post("/signin", async (req,res) =>{
         res.status(401).json({
             message: "invalid user",
         })
+        return;
+    }
+
+    const isPasswordCorrect = await bcrypt.compare(parsedData.data.password, user.password);
+    if(!isPasswordCorrect){
+        res.status(401).json({
+            message: " Invalid Password",
+        })
+        return;
     }
 
 
@@ -88,6 +99,9 @@ app.post("/room", middleware , async (req,res) =>{
     //@ts-ignore
     try {
         const userId = req.userId;
+        if(!userId){
+            throw new Error("User id not found ")
+        }
     const room  = await prismaClient.room.create({
         data:{
             slug : parsedData.data.name,
@@ -104,4 +118,22 @@ app.post("/room", middleware , async (req,res) =>{
     }
     
 } )
+
+// creating this end point to fetch previous chats when the user joins the room
+app.get("/chats/:roomId", (req,res)=>{
+    const roomId  = Number(req.params.roomId);
+    const messages = prismaClient.chat.findMany({
+        where:{
+            roomId: roomId
+        },
+        orderBy:{
+            id : "desc"
+        },
+        take: 50
+    });
+
+    res.json({
+        messages
+    })
+})
 app.listen(3001);
