@@ -121,7 +121,8 @@ app.post("/room", middleware , async (req,res) =>{
 
 // creating this end point to fetch previous chats when the user joins the room
 app.get("/chats/:roomId", (req,res)=>{
-    const roomId  = Number(req.params.roomId);
+    try {
+         const roomId  = Number(req.params.roomId);
     const messages = prismaClient.chat.findMany({
         where:{
             roomId: roomId
@@ -135,6 +136,12 @@ app.get("/chats/:roomId", (req,res)=>{
     res.json({
         messages
     })
+    } catch (error) {
+        res.json({
+            messages: []
+        })
+    }
+   
 })
 
 app.get("/rooms/:slug", async (req,res) =>{

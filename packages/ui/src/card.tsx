@@ -7,9 +7,9 @@ export function Card({
   href,
 }: {
   className?: string;
-  title: string;
+  title?: string;
   children: React.ReactNode;
-  href: string;
+  href?: string;
 }): JSX.Element {
   return (
     <a
@@ -21,7 +21,7 @@ export function Card({
       <h2>
         {title} <span>-&gt;</span>
       </h2>
-      <p>{children}</p>
+      <div>{children}</div>
     </a>
   );
 }
