@@ -34,7 +34,7 @@ Free-hand Drawing (Pen/Brush)
 
 📸 Screenshots
 
-![Homepage](./screenshots/herosection.png)  
+![Homepage](./apps/screenshots/herosection.png)  
 ![Features](./screenshots/Features.png)  
 ![Collaborative Mode](./screenshots/Joinroom.png)  
 ![Draw board](./screenshots/draw.png)  
