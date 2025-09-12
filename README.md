@@ -34,13 +34,28 @@ Free-hand Drawing (Pen/Brush)
 
 📸 Screenshots
 
+Homepage --
+
 ![Homepage](./screenshots_temp/herosection.png)  
+
+Features--
+
 ![Features](./screenshots_temp/Features.png)  
+
+Collaborative Mode--
+
 ![Collaborative Mode](./screenshots_temp/Joinroom.png)  
+
+Draw board --
+
 ![Draw board](./screenshots_temp/draw.png)  
+
+Sign Up--
+
 ![SingnUp](./screenshots_temp/signup.png)
 
 🛠️ Tech Stack
+
 Frontend: Next.js (with TypeScript)
 
 Backend: Express + WebSocket
