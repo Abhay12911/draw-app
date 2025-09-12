@@ -35,10 +35,10 @@ Free-hand Drawing (Pen/Brush)
 📸 Screenshots
 
 ![Homepage](./screenshots_temp/herosection.png)  
-![Features](./screenshots/Features.png)  
-![Collaborative Mode](./screenshots/Joinroom.png)  
-![Draw board](./screenshots/draw.png)  
-![SingnUp](./screenshots/signup.png)
+![Features](./screenshots_temp/Features.png)  
+![Collaborative Mode](./screenshots_temp/Joinroom.png)  
+![Draw board](./screenshots_temp/draw.png)  
+![SingnUp](./screenshots_temp/signup.png)
 
 🛠️ Tech Stack
 Frontend: Next.js (with TypeScript)
